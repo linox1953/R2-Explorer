@@ -151,6 +151,27 @@ export default {
 			}
 		},
 		downloadObject: async function () {
+			// 优先走 R2 公开直链
+			const BUCKET_PUBLIC_URLS = {
+				drive: 'https://df.doublehighc.top',
+			};
+			const publicUrl = BUCKET_PUBLIC_URLS[this.selectedBucket];
+			if (publicUrl) {
+				try {
+					const key = this.prop.row.key;
+					const encodedPath = key.split('/').map(encodeURIComponent).join('/');
+					const link = document.createElement('a');
+					link.href = `${publicUrl}/${encodedPath}`;
+					link.download = this.prop.row.name;
+					document.body.appendChild(link);
+					link.click();
+					document.body.removeChild(link);
+					return;
+				} catch (err) {
+					console.warn('Public URL download failed, falling back to API:', err);
+				}
+			}
+
 			try {
 				const response = await apiHandler.downloadFile(
 					this.selectedBucket,
