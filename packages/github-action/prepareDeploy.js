@@ -38,7 +38,7 @@ let wranglerConfig = `
 name = "${R2EXPLORER_WORKER_NAME}"
 compatibility_date = "2024-11-06"
 main = "src/index.ts"
-assets = { directory = "node_modules/r2-explorer/dashboard", binding = "ASSETS", html_handling = "auto-trailing-slash", not_found_handling = "single-page-application", run_worker_first = ["/api/*", "/share/*"] }
+assets = { directory = "packages/dashboard/dist", binding = "ASSETS", html_handling = "auto-trailing-slash", not_found_handling = "single-page-application", run_worker_first = ["/api/*", "/share/*"] }
 `;
 
 if (R2EXPLORER_DOMAIN) {
@@ -55,27 +55,27 @@ workers_dev = true
 }
 
 for (const rawBucket of R2EXPLORER_BUCKETS.split("\n")) {
-  const bucket = rawBucket.trim();
-  if (!bucket) continue; // skip empty lines
-  const split = bucket.split(":");
-  if (split.length !== 2 && split.length !== 3) {
-    console.error("R2EXPLORER_BUCKETS is not set correctly!");
-    console.error(`"${bucket}" is not in the correct format => ALIAS:BUCKET_NAME[:JURISDICTION]`);
-    process.exit(1);
-  }
+	const bucket = rawBucket.trim();
+	if (!bucket) continue; // skip empty lines
+	const split = bucket.split(":");
+	if (split.length !== 2 && split.length !== 3) {
+		console.error("R2EXPLORER_BUCKETS is not set correctly!");
+		console.error(`"${bucket}" is not in the correct format => ALIAS:BUCKET_NAME[:JURISDICTION]`);
+		process.exit(1);
+	}
 
-  const [alias, bucketName, jurisdiction] = split;
+	const [alias, bucketName, jurisdiction] = split;
 
-  wranglerConfig += `
+	wranglerConfig += `
 [[r2_buckets]]
 binding = '${alias}'
 bucket_name = '${bucketName}'
 preview_bucket_name = '${bucketName}'
 `;
-  if (jurisdiction) {
-    wranglerConfig += `jurisdiction = '${jurisdiction}'
+	if (jurisdiction) {
+		wranglerConfig += `jurisdiction = '${jurisdiction}'
 `;
-  }
+	}
 }
 
 console.log(wranglerConfig);
