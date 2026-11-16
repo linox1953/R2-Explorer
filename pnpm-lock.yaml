@@ -7,6 +7,10 @@ settings:
 importers:
 
   .:
+    dependencies:
+      r2-explorer:
+        specifier: ^1.2.0
+        version: 1.2.0(hono@4.13.5)
     devDependencies:
       '@biomejs/biome':
         specifier: 1.9.4
@@ -455,6 +459,7 @@ packages:
 
   '@cloudflare/vitest-pool-workers@0.10.15':
     resolution: {integrity: sha512-eISef+JvqC5xr6WBv2+kc6WEjxuKSrZ1MdMuIwdb4vsh8olqw7WHW5pLBL/UzAhbLVlXaAL1uH9UyxIlFkJe7w==}
+    deprecated: '@cloudflare/vitest-pool-workers has been renamed to @cloudflare/vitest-plugin. This package will not receive future updates.'
     peerDependencies:
       '@vitest/runner': 2.0.x - 3.2.x
       '@vitest/snapshot': 2.0.x - 3.2.x
@@ -4372,6 +4377,9 @@ packages:
   quick-lru@5.1.1:
     resolution: {integrity: sha512-WuyALRjWPDGtt/wzJiadO5AXY+8hZ80hVpe6MyivgraREW751X3SbhRvG3eLKOYN+8VEvqLcf3wdnt44Z4S4SA==}
     engines: {node: '>=10'}
+
+  r2-explorer@1.2.0:
+    resolution: {integrity: sha512-x9MKwkGLoOsxDBFj8khp1JhARUSh8lzoFiQuslvsJF3Jcmi7ftlg5k9kk5NW1E8VlApZThkY+OXUc5p3tB/xkQ==}
 
   randombytes@2.1.0:
     resolution: {integrity: sha512-vYl3iOX+4CKUWuxGi9Ukhie6fsqXqS9FE2Zaic4tNFD2N2QQaXOMFbuKK4QmDHC0JO6B1Zp41J0LpT0oR68amQ==}
@@ -9172,6 +9180,15 @@ snapshots:
   queue-microtask@1.2.3: {}
 
   quick-lru@5.1.1: {}
+
+  r2-explorer@1.2.0(hono@4.13.5):
+    dependencies:
+      '@hono/cloudflare-access': 0.3.1(hono@4.13.5)
+      chanfana: 2.8.3
+      postal-mime: 2.7.6
+      zod: 3.25.76
+    transitivePeerDependencies:
+      - hono
 
   randombytes@2.1.0:
     dependencies:

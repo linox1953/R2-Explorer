@@ -24,5 +24,8 @@
 		"@playwright/test": "^1.62.1",
 		"wrangler": "^4.127.1"
 	},
-	"packageManager": "pnpm@11.24.0"
+	"packageManager": "pnpm@11.24.0",
+	"dependencies": {
+		"r2-explorer": "^1.2.0"
+	}
 }
